@@ -25,7 +25,7 @@ module CrunchLogerRailsClient
       status
     end
 
-    def custom_log log
+    def self.custom_log log
     	uri = URI.parse("http://localhost:3001/logger_test")
       Net::HTTP.post_form(uri, {:api_key => "asdqwetgzvasd", :type => "custom_log", :log => log})
     end
