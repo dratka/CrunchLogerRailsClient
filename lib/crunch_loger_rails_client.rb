@@ -2,6 +2,7 @@ require 'net/http'
 module CrunchLogerRailsClient
 	class LogSubscriber < ActiveSupport::LogSubscriber
     def process_action event
+    	binding.pry
       payload = event.payload
       param_method = payload[:params]['_method']
       method = param_method ? param_method.upcase : payload[:method]
