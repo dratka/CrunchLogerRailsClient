@@ -13,8 +13,7 @@ module CrunchLogerRailsClient
       message = "%-6s #{status} #{path}" % method
       message << " parameters=#{params}" unless params.empty?
       uri = URI.parse("http://localhost:3001/logger_test")
-      Net::HTTP.post_form(uri, {:api_key => "asdqwetgzvasd", :payload => payload})
-      # binding.pry
+      Net::HTTP.post_form(uri, {:api_key => "asdqwetgzvasd", :type => "rails_log", :event => event})
     end
 
     def compute_status payload
@@ -24,6 +23,11 @@ module CrunchLogerRailsClient
         status = ActionDispatch::ExceptionWrapper.status_code_for_exception(exception_class_name)
       end
       status
+    end
+
+    def custom_log log
+    	uri = URI.parse("http://localhost:3001/logger_test")
+      Net::HTTP.post_form(uri, {:api_key => "asdqwetgzvasd", :type => "custom_log", :log => log})
     end
   end
 end
